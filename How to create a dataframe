@@ -1,0 +1,28 @@
+# 学习构建Dataframe 用字典形式导入
+
+import pandas as pd
+
+s1=pd.Series([100,200,300],index=[1,2,3],name='A列')
+s2=pd.Series([500,600,700],index=[1,2,3],name='B列')
+s3=pd.Series([500,600,700],index=[1,2,3],name='C列')
+
+# 以字典形式添加 字典的key是Series的name 即列名
+s=pd.DataFrame({s1.name:s1,s2.name:s2,s3.name:s3})
+
+# 以序列形式添加 字Series的name会变成行索引
+s4=pd.DataFrame([s1,s2,s3])
+
+# 构建dataframe的时候会自动根据index对齐，取并集，用NaN补齐
+
+'''
+Dataframe的每一列都是一个Series，可以用 dataframe名称['列名']取出
+Series有个函数at[索引号即index]改变series格子中的内容
+
+dataframe名称['列名'].at[index]=xxx
+
+dataframe也有at,at[行索引,列名]
+'''
+
+s['A列'].at[2]=999
+
+s
